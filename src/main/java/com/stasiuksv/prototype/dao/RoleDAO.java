@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.stasiuksv.prototype.model.Role;
+import com.stasiuksv.prototype.model.RoleEntity;
 
 @Repository
 @Transactional
@@ -23,12 +23,12 @@ public class RoleDAO
 	}
 	
 	
-	public void create(Role role) 
+	public void create(RoleEntity role) 
 	{
 		getSession().persist(role);
 	}
 	
-	public void delete(Role role)
+	public void delete(RoleEntity role)
 	{
 		if (getSession().contains(role))
 			getSession().remove(role);
@@ -37,18 +37,18 @@ public class RoleDAO
 		return;	
 	}
 	
-	public void update(Role role) {
+	public void update(RoleEntity role) {
 		getSession().merge(role);
 	    return;
 	  }
 	
-	public Role getById(long id) 
+	public RoleEntity getById(long id) 
 	{
-	   return getSession().find(Role.class, id);
+	   return getSession().find(RoleEntity.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Role> getAll() 
+	public List<RoleEntity> getAll() 
 	{
 	    return  getSession().createQuery("from role").getResultList();
 	}

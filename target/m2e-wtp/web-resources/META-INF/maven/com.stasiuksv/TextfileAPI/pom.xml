@@ -143,7 +143,9 @@
 		        <artifactId>maven-war-plugin</artifactId>
 		        <configuration>
 		            <failOnMissingWebXml>false</failOnMissingWebXml>
-		        </configuration>
+		           	<outputDirectory>E:\Development\SDKS\tomcat\webapps</outputDirectory>
+		          	<!--<outputDirectory>target</outputDirectory>-->
+                </configuration>
 		    </plugin>
 		  
 	  </plugins>

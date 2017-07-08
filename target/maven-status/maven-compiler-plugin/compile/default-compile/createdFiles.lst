@@ -1,12 +1,1 @@
-com\stasiuksv\prototype\DatabaseConfig.class
-com\stasiuksv\prototype\LoggingUnit.class
-com\stasiuksv\prototype\Initializer.class
-com\stasiuksv\prototype\controllers\RolesController.class
-com\stasiuksv\prototype\model\User.class
-com\stasiuksv\prototype\WebAppConfig.class
-com\stasiuksv\prototype\dao\UserDAO.class
-com\stasiuksv\prototype\service\RoleService.class
-com\stasiuksv\prototype\service\DataService.class
-com\stasiuksv\prototype\model\Role.class
-com\stasiuksv\prototype\dao\RoleDAO.class
-com\stasiuksv\prototype\model\StoredObject.class
+com\stasiuksv\prototype\controllers\UsersController$1.class

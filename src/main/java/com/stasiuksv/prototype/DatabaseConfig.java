@@ -19,28 +19,24 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = { "classpath:application.properties" })
-public class DatabaseConfig {
+public class DatabaseConfig 
+{
 
-  /**
-   * DataSource definition for database connection. Settings are read from
-   * the application.properties file (using the env object).
-   */
-  @Bean
-  public DataSource dataSource() 
-  {
-    DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName(env.getProperty("db.driver"));
-    dataSource.setUrl(env.getProperty("db.url"));
-    dataSource.setUsername(env.getProperty("db.username"));
-    dataSource.setPassword(env.getProperty("db.password"));
-    return dataSource;
-  }
+	@Bean
+  	public DataSource dataSource() 
+  	{
+  
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    	dataSource.setDriverClassName(env.getProperty("db.driver"));
+    	dataSource.setUrl(env.getProperty("db.url"));
+    	dataSource.setUsername(env.getProperty("db.username"));
+    	dataSource.setPassword(env.getProperty("db.password"));
+    	return dataSource;
+  	}
 
-  /**
-   * Declare the JPA entity manager factory.
-   */
-  @Bean
-  public LocalSessionFactoryBean getSessionFactory() {
+	@Bean
+	public LocalSessionFactoryBean getSessionFactory() 
+	{
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 		sessionFactory.setPackagesToScan(new String[] { "com.stasiuksv.prototype.model" });
@@ -48,7 +44,8 @@ public class DatabaseConfig {
 		return sessionFactory;
 	}
 	 
-	private Properties getHibernateProperties() {
+	private Properties getHibernateProperties() 
+	{
 	
 	    Properties additionalProperties = new Properties();
 	    additionalProperties.put("hibernate.dialect",env.getProperty("hibernate.dialect"));
@@ -57,10 +54,7 @@ public class DatabaseConfig {
 	  
 		return additionalProperties;
 	}
-
-  /**
-   * Declare the transaction manager.
-   */
+	
 	@Bean
 	public HibernateTransactionManager transactionManager() 
 	{
@@ -69,27 +63,22 @@ public class DatabaseConfig {
 		return txManager;
 	}
   
-  /**
-   * PersistenceExceptionTranslationPostProcessor is a bean post processor
-   * which adds an advisor to any bean annotated with Repository so that any
-   * platform-specific exceptions are caught and then rethrown as one
-   * Spring's unchecked data access exceptions (i.e. a subclass of 
-   * DataAccessException).
-   */
-  @Bean
-  public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-    return new PersistenceExceptionTranslationPostProcessor();
-  }
-
-  // Private fields
   
-  @Autowired
-  private Environment env;
-
-  @Autowired
-  private DataSource dataSource;
-  
-  @Autowired
-  private SessionFactory sessionFactory;
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() 
+	{
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+	
+	  // Private fields
+	  
+	@Autowired
+	private Environment env;
+	
+	@Autowired
+	private DataSource dataSource;
+	  
+	@Autowired
+	private SessionFactory sessionFactory;
 
 }
