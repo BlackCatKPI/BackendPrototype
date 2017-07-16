@@ -32,7 +32,7 @@
 <div class="container">
  
    <div class="jumbotron" style="margin-top: 20px;">
-        <h1>Здраствуйте!</h1>
+        <h1>Здравствуйте!</h1>
         <p class="lead">
             Это проект, создающий видимость действующего веб приложения.
         </p>
