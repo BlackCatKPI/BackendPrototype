@@ -3,6 +3,7 @@ E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\LoggingUnit.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\dao\UserDAO.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\controllers\ExchangeObject.java
+E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\controllers\LoginController.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\controllers\UsersController.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\service\RoleService.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\controllers\RolesController.java
@@ -11,6 +12,7 @@ E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\controllers\User.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\model\RoleEntity.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\model\StoredObject.java
+E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\controllers\IndexController.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\Initializer.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\service\UserService.java
 E:\Development\Eclipse_EE_WS\BackendPrototype\BackendPrototype\src\main\java\com\stasiuksv\prototype\DatabaseConfig.java

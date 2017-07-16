@@ -12,6 +12,7 @@
   <properties>
      <springframework.version>4.3.9.RELEASE</springframework.version>
      <hibernate.version>5.2.10.Final</hibernate.version>
+     <springsecurity.version> 4.2.3.RELEASE</springsecurity.version>
   </properties>
   
   
@@ -73,19 +74,9 @@
 		<version>${hibernate.version}</version>
 	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-	<dependency>
-	    <groupId>javax.validation</groupId>
-	    <artifactId>validation-api</artifactId>
-	    <version>1.1.0.Final</version>
-	</dependency>
-
 	
-  	<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-  	</dependency> 
+
+
   
   	<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 	<dependency>
@@ -108,6 +99,45 @@
 	</dependency>
 
 
+	<!-- Spring Security -->
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${springsecurity.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${springsecurity.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-taglibs</artifactId>
+        <version>${springsecurity.version}</version>
+    </dependency>
+
+	    <!-- Servlet+JSP+JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>1.1.0.Final</version>
+		</dependency>
+	
   </dependencies>
   
 
