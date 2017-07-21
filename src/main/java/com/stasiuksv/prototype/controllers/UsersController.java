@@ -48,7 +48,7 @@ public class UsersController {
     
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getuserByID(@PathVariable long id) 
+    public ResponseEntity<Object> getUserByID(@PathVariable long id) 
     {
     	UserEntity user = userService.getByID(id);
     	if (user == null)
@@ -56,9 +56,11 @@ public class UsersController {
     	else
     		return ResponseEntity.ok(user);
     }
-   
+    
+	
+	
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<Object> getAllusers() 
+    public ResponseEntity<Object> getAllUsers() 
     {
     	List<UserEntity> usersList = userService.listAll();
 	   	return ResponseEntity.ok(usersList);
@@ -66,7 +68,7 @@ public class UsersController {
     
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteuserByID(@PathVariable long id) 
+    public ResponseEntity<Object> deleteUserByID(@PathVariable long id) 
     {
     	HttpStatus status = userService.deleteByID(id);
     	if (status.equals(HttpStatus.OK))
@@ -75,4 +77,15 @@ public class UsersController {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested record is not found");
     	
     }
+    
+    @RequestMapping(value = "/{name}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> getUserByID(@PathVariable String name) 
+    {
+    	UserEntity user = userService.getByName(name);
+    	if (user == null)
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested record is not found");
+    	else
+    		return ResponseEntity.ok(user);    	
+    }
+   
  }

@@ -12,6 +12,7 @@ import com.stasiuksv.prototype.LoggingUnit;
 import com.stasiuksv.prototype.controllers.Role;
 import com.stasiuksv.prototype.dao.RoleDAO;
 import com.stasiuksv.prototype.model.RoleEntity;
+import com.stasiuksv.prototype.model.UserEntity;
 
 @Service
 @Transactional
@@ -65,6 +66,12 @@ public class RoleService implements DataService<Role, RoleEntity>
 	public List<RoleEntity> listAll() 
 	{
 		return roleDAO.getAll();
+	}
+	
+	@Override
+	public RoleEntity getByName(String name)
+	{
+		return roleDAO.getByName(name);
 	}
 		
 }

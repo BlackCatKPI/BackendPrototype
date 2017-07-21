@@ -4,14 +4,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.stasiuksv.prototype.controllers.Role;
 import com.stasiuksv.prototype.controllers.User;
@@ -28,6 +34,7 @@ public class UserEntity implements StoredObject
 	  
   	@NotNull
   	@Size(min = 2, max = 80)
+  	@Column(unique=true)
   	private String userName;
 	  
   	@NotNull
@@ -37,8 +44,10 @@ public class UserEntity implements StoredObject
   	@NotNull
   	private Boolean isActive;
   	
-  	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-  	//@JoinColumn(name="id")
+  	@ManyToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+  	@JoinTable(name = "user_role", 
+  				joinColumns = @JoinColumn(name = "userID"), 
+  				inverseJoinColumns =  @JoinColumn(name = "roleID"))
   	Set<RoleEntity> roles;
   	
   	public UserEntity(){}
@@ -46,7 +55,9 @@ public class UserEntity implements StoredObject
  	public UserEntity(User user) 
   	{
  		userName = user.getUserName();
- 		passWord = user.getPassWord();
+ 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassWord());
+		passWord = encodedPassword;
  		isActive = user.getIsActive();
  		roles=new HashSet<>();
  		for (Role role:user.getRoles())

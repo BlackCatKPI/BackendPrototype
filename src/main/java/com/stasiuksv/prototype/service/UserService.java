@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,12 +33,16 @@ public class UserService implements DataService<User,UserEntity>
 		}
 
 		@Override
+		
 		public HttpStatus update(Long id, User user)
 		{	
 			UserEntity savedUser = userDAO.getById(id);
 			if (savedUser==null)
 				return HttpStatus.NOT_FOUND;
-			
+			savedUser.setUserName(user.getUserName());
+			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodedPassword = passwordEncoder.encode(user.getPassWord());
+			savedUser.setPassWord(encodedPassword);
 			savedUser.getRoles().clear();
 			for (Role role:user.getRoles())
 				savedUser.getRoles().add(new RoleEntity(role));
@@ -69,8 +76,11 @@ public class UserService implements DataService<User,UserEntity>
 			return userDAO.getAll();
 		}
 
-	
-
+		@Override
+		public UserEntity getByName(String name)
+		{
+			return userDAO.getByName(name);
+		}
 
 		
 }

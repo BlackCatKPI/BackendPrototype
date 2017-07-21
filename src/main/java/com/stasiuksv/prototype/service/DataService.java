@@ -15,4 +15,5 @@ public interface  DataService <T extends ExchangeObject, U extends StoredObject>
 	public HttpStatus deleteByID(Long id);
 	public U getByID(Long id);
 	public List<U> listAll();
+	public U getByName(String name);
 }

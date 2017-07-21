@@ -2,6 +2,12 @@ package com.stasiuksv.prototype.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +57,21 @@ public class RoleDAO
 	public List<RoleEntity> getAll() 
 	{
 	    return  getSession().createQuery("from role").getResultList();
+	}
+	
+	
+	public RoleEntity getByName(String roleName) 
+	{
+		 CriteriaBuilder builder = getSession().getCriteriaBuilder();
+		 CriteriaQuery<RoleEntity> criteria = builder.createQuery(RoleEntity.class);
+		 Root<RoleEntity> from = criteria.from(RoleEntity.class);
+		 criteria.select(from);
+		 criteria.where(builder.equal(from.get("roleName"), roleName));
+		 TypedQuery<RoleEntity> typed = getSession().createQuery(criteria);
+		 try {
+		        return typed.getSingleResult();
+		   } catch (final NoResultException nre) {
+		        return null;
+		    }
 	}
 }

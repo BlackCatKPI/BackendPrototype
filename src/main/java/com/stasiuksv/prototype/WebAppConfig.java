@@ -1,5 +1,6 @@
 package com.stasiuksv.prototype;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import com.stasiuksv.prototype.filters.UserDetailsServiceImpl;
+import com.stasiuksv.prototype.service.UserDetailsServiceImpl;
+
+
  
 @Configuration
 @EnableWebMvc
@@ -32,9 +35,5 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
 
         return resolver;
     }
-    
-    @Bean
-    public UserDetailsService getUserDetailsService(){
-        return new UserDetailsServiceImpl();
-    }
+     
 }
