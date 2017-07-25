@@ -1,6 +1,5 @@
 package com.stasiuksv.prototype.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import com.stasiuksv.prototype.LoggingUnit;
 import com.stasiuksv.prototype.controllers.Role;
 import com.stasiuksv.prototype.dao.RoleDAO;
 import com.stasiuksv.prototype.model.RoleEntity;
-import com.stasiuksv.prototype.model.UserEntity;
 
 @Service
 @Transactional
@@ -35,8 +33,9 @@ public class RoleService implements DataService<Role, RoleEntity>
 		
 		if (roleDAO.getById(id)==null)
 			return HttpStatus.NOT_FOUND;
-		
-		roleDAO.update(new RoleEntity(role));
+		RoleEntity roleEntity = roleDAO.getById(id);
+		roleEntity.setRoleName(role.getRoleName());
+		roleDAO.update(roleEntity);
 		LoggingUnit.log.info("Record "  + id +  " updated");
 		return HttpStatus.OK;
 	}
@@ -54,7 +53,7 @@ public class RoleService implements DataService<Role, RoleEntity>
 		else 
 			return HttpStatus.NOT_FOUND;
 	}
-
+	
 	@Override
 	public RoleEntity getByID(Long id) 
 	{

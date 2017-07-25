@@ -2,8 +2,10 @@ package com.stasiuksv.prototype.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +17,11 @@ public class RoleEntity implements StoredObject
 {
 	
 		@Id
-		@GeneratedValue
+		@GeneratedValue(generator = "idGenerator", strategy = GenerationType.SEQUENCE)
+		@TableGenerator(name = "idGenerator", table = "table_sequence", 
+        pkColumnName = "name", valueColumnName = "value",
+        pkColumnValue = "role_gen", 
+        initialValue = 4, allocationSize = 1)
 		private long id;
 		
 		

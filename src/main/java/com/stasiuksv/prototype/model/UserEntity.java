@@ -8,19 +8,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.stasiuksv.prototype.controllers.Role;
 import com.stasiuksv.prototype.controllers.User;
+import com.stasiuksv.prototype.dao.RoleDAO;
+import com.stasiuksv.prototype.service.RoleService;
 
 
 @Entity(name = "user")
@@ -29,7 +34,11 @@ public class UserEntity implements StoredObject
 {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "idGenerator", strategy = GenerationType.SEQUENCE)
+	@TableGenerator(name = "idGenerator", table = "table_sequence", 
+    pkColumnName = "name", valueColumnName = "value",
+    pkColumnValue = "user_gen", 
+    initialValue = 2, allocationSize = 1)
   	private long id;
 	  
   	@NotNull
@@ -44,7 +53,7 @@ public class UserEntity implements StoredObject
   	@NotNull
   	private Boolean isActive;
   	
-  	@ManyToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+  	@ManyToMany(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
   	@JoinTable(name = "user_role", 
   				joinColumns = @JoinColumn(name = "userID"), 
   				inverseJoinColumns =  @JoinColumn(name = "roleID"))
@@ -52,6 +61,7 @@ public class UserEntity implements StoredObject
   	
   	public UserEntity(){}
  	
+  	
  	public UserEntity(User user) 
   	{
  		userName = user.getUserName();
@@ -60,9 +70,7 @@ public class UserEntity implements StoredObject
 		passWord = encodedPassword;
  		isActive = user.getIsActive();
  		roles=new HashSet<>();
- 		for (Role role:user.getRoles())
- 			roles.add(new RoleEntity(role));
-    }
+ 	}
   
 
     public long getId() 

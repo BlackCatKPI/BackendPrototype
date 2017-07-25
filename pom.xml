@@ -15,14 +15,7 @@
      <springsecurity.version> 4.2.3.RELEASE</springsecurity.version>
   </properties>
   
-  
-  
-  
-  
-  
-  
-  
- <dependencies>
+   <dependencies>
 	 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
@@ -50,7 +43,13 @@
 	    <scope>test</scope>
 	</dependency>
 	
-	
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	    <scope>test</scope>
+	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 	<dependency>
@@ -138,6 +137,8 @@
 		    <version>1.1.0.Final</version>
 		</dependency>
 	
+	
+	
   </dependencies>
   
 
@@ -173,7 +174,8 @@
 		        <artifactId>maven-war-plugin</artifactId>
 		        <configuration>
 		            <failOnMissingWebXml>false</failOnMissingWebXml>
-		           	<outputDirectory>E:\Development\SDKS\tomcat\webapps</outputDirectory>
+		           	<!--<outputDirectory>E:\Development\SDKS\tomcat\webapps</outputDirectory>-->
+					<outputDirectory>D:\StasiukSV\JSDK\tomcat\webapps</outputDirectory>
 		          	<!--<outputDirectory>target</outputDirectory>-->
                 </configuration>
 		    </plugin>

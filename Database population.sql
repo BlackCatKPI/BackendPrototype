@@ -24,7 +24,6 @@ CREATE TABLE USER_ROLE (
 );
   
 
-
 INSERT INTO user(id,userName,passWord,isActive)
 VALUES (1,'Supervis0r','$2a$10$tigNVl4SRYdOsZGBh428e.0V2NTEWTM/K0t.mglTQ9oWyhXUYNJ8e',1);
 

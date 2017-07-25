@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class RolesController {
 	@Autowired
 	private DataService<Role, RoleEntity> roleService;
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<Object>createObjectByPOST(@RequestBody Role role) 
     {
@@ -29,6 +31,7 @@ public class RolesController {
     	return ResponseEntity.ok("Record created");
     }
     
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ResponseEntity<Object>changeObjectByPOST(@PathVariable long id, Role role) 
     {
@@ -40,7 +43,7 @@ public class RolesController {
     		return ResponseEntity.status(status).body("Record " + id +" not found");
     }
     
-    
+    @PreAuthorize("hasAuthority('MODERATOR')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getRoleByID(@PathVariable long id) 
     {
@@ -51,6 +54,7 @@ public class RolesController {
     		return ResponseEntity.ok(role);
     }
     
+    @PreAuthorize("hasAuthority('MODERATOR')")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<Object> getAllRoles() 
     {
@@ -58,7 +62,7 @@ public class RolesController {
 	   	return ResponseEntity.ok(result);
     }
     
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteRoleByID(@PathVariable long id) 
     {

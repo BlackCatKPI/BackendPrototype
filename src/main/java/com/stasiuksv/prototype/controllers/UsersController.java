@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +23,18 @@ public class UsersController {
 	@Autowired
 	private DataService<User,UserEntity> userService;
 	
- 
 
-	
+	@PreAuthorize("hasAuthority('MODERATOR')")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<Object>createObjectByPOST(@RequestBody User user) 
     {
       	HttpStatus status = userService.create(user);
+      	if(status.equals(HttpStatus.BAD_REQUEST))ResponseEntity.status(status).body("Wrong roles"); 
+      	if(status.equals(HttpStatus.CONFLICT))ResponseEntity.status(status).body("User with such name already exists"); 
     	return ResponseEntity.ok("Record created");
     }
     
+	@PreAuthorize("hasAuthority('MODERATOR')")
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ResponseEntity<Object>changeObjectByPOST(@PathVariable long id, @RequestBody User user) 
     {
@@ -46,7 +49,7 @@ public class UsersController {
     	}
      }
     
-    
+	@PreAuthorize("hasAuthority('MODERATOR')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getUserByID(@PathVariable long id) 
     {
@@ -57,16 +60,15 @@ public class UsersController {
     		return ResponseEntity.ok(user);
     }
     
-	
-	
-    @RequestMapping(value = "", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('MODERATOR')")
+	@RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<Object> getAllUsers() 
     {
     	List<UserEntity> usersList = userService.listAll();
 	   	return ResponseEntity.ok(usersList);
     }
     
-
+	@PreAuthorize("hasAuthority('MODERATOR')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteUserByID(@PathVariable long id) 
     {
@@ -77,15 +79,5 @@ public class UsersController {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested record is not found");
     	
     }
-    
-    @RequestMapping(value = "/{name}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> getUserByID(@PathVariable String name) 
-    {
-    	UserEntity user = userService.getByName(name);
-    	if (user == null)
-    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested record is not found");
-    	else
-    		return ResponseEntity.ok(user);    	
-    }
-   
+      
  }
